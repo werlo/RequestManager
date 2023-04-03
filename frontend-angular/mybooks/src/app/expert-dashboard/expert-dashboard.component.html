@@ -1,0 +1,59 @@
+<div class="container">
+    <h1>Expert Dashboard</h1>
+    <div class="button-group">
+      <button class="btn btn-primary" (click)="showAllTask()">Show All Tasks</button>
+      <button class="btn btn-primary" (click)="showMyTask()">Show Assigned Tasks</button>
+    </div>
+    <div class="task-list">
+      <div *ngIf="showAllTasks">
+        <h3>All Task Dashboard</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Task Name</th>
+              <th>Description</th>
+              <th>Deadline</th>
+              <th>Estimated Effort</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasksArray">
+              <td>{{ task.name }}</td>
+              <td>{{ task.description }}</td>
+              <td>{{ task.deadline | date:'short' }}</td>
+              <td>{{ task.estimatedEffort }}</td>
+              <td>{{ task.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="!showAllTasks"> <h3> My Task Dashboard</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Task Name</th>
+              <th>Description</th>
+              <th>Deadline</th>
+              <th>Estimated Effort</th>
+              <th>Status</th>
+              <th>Resolve</th>
+              <th>Pick</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of myTasksArray">
+              <td>{{ task.name }}</td>
+              <td>{{ task.description }}</td>
+              <td>{{ task.deadline | date:'short' }}</td>
+              <td>{{ task.estimatedEffort }}</td>
+              <td>{{ task.status }}</td>
+              <td><button class="btn btn-primary" (click)="resolve(task)">Resolve</button></td>
+              <td><button class="btn btn-primary" (click)="pick(task)">Pick</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

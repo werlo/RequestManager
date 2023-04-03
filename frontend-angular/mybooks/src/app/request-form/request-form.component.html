@@ -1,0 +1,55 @@
+<div>
+    <button type="button" class="add-button" (click)="showStatus()">Show Request Status</button>
+  </div>
+  <div *ngIf="showForm">
+    <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+      <h3>Request Form</h3>
+      <div formArrayName="tasks">
+        <div class="task" *ngFor="let task of tasks.controls; let i=index" [formGroupName]="i">
+          <div class="task-header">Task {{i+1}}
+            <button type="button" class="delete-button" (click)="deleteTask(i)">Delete Task</button>
+          </div>
+          <label for="taskName">Task Name</label>
+          <input type="text" formControlName="taskName" id="taskName" placeholder="Enter task name">
+    
+          <label for="description">Description</label>
+          <textarea formControlName="description" id="description" placeholder="Enter description"></textarea>
+    
+          <label for="deadline">Deadline</label>
+          <input type="datetime-local" formControlName="deadline" id="deadline">
+    
+          <label for="estimatedEffort">Estimated Effort (hours)</label>
+          <input type="number" formControlName="estimatedEffort" id="estimatedEffort" placeholder="Enter estimated effort">
+        </div>
+      </div>
+    
+      <button type="button" class="add-button" (click)="addTask()">Add Task</button>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div *ngIf="!showForm">
+    <h3>Task Dashboard</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Task Name</th>
+          <th>Description</th>
+          <th>Deadline</th>
+          <th>Estimated Effort</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasksArray">
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.deadline | date:'short' }}</td>
+          <td>{{ task.estimatedEffort }}</td>
+          <td>{{ task.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
